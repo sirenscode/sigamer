@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'Afacad';
+  src: url("/public/fonts/Afacad/static/Afacad-Medium.ttf");
+}
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  display: flex;  
+  flex-direction: column;
+  font-family: "Poppins",sans-serif;
+  background-color: #111111;
+  color: #FFF;
+  
+}
+h1,p,span,h2{
+  font-family: "Poppins", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+#container::before{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(45deg,#000,transparent);
+  z-index: 1;
+}
+#card::before{
+  width: 100%;
+  height: 100%;
+  content: "";
+  
+  position: absolute;
+}
+#card{
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+#card:hover{
+  transform: scale(1.1);
+}
+#card-hover{
+  background: linear-gradient(0deg, #000, transparent);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+#card-hover:hover{
+  opacity: 1;
+}
+#header-bg::before{
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(0deg, #111111, transparent);
+  position: absolute;
+}
+::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track{
+  height: 4px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-button{
+  display: none;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #CD8D00;
+  border-radius: 10px;
+}
+input{
+  outline: none;
+}
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.dropdown {
+  position: relative;
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+  display: block;
+  animation: fadeIn 5s ease-in-out;
+}
+li{
+  margin-bottom: 10px;
+}
+
+.down {
+  display: block;
+  animation: fadeIn .3s ease-in-out;
+}
+.hide{
+  display: none;
+  animation: fadeOut .3s ease-in-out;
+}
+.link{
+  display: inline-block;
+  text-decoration: none;
+}
+.link::after{
+  content: "";
+  height: 2px;
+  background: #FF8D00;
+  z-index: 1;
+  width: 0;
+  margin-right: auto;
+  transition: width .3s;
+  display: block;
+}
+.link:hover::after{
+  width: 100%;
+}
+.hide{
+  opacity: 0;
+  transition: opacity 5s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.loader {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  --c:no-repeat linear-gradient(#FF8D00 0 0);
+  background: var(--c),var(--c),var(--c),var(--c);
+  background-size: 21px 21px;
+  animation: l5 1.5s infinite cubic-bezier(0.3,1,0,1);
+}
+@keyframes l5 {
+ 0%   {background-position: 0    0,100% 0   ,100% 100%,0 100%}
+ 33%  {background-position: 0    0,100% 0   ,100% 100%,0 100%;width:60px;height: 60px}
+ 66%  {background-position: 100% 0,100% 100%,0    100%,0 0   ;width:60px;height: 60px}
+ 100% {background-position: 100% 0,100% 100%,0    100%,0 0   }
+}
+
+.hide{
+  -webkit-animation-duration: 10s;animation-duration: 10s;
+  -webkit-animation-fill-mode: both;animation-fill-mode: both;
+}
+
+         
+@-webkit-keyframes fadeOut {
+   0% {opacity: 1;}
+   100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+   0% {opacity: 1;}
+   100% {opacity: 0;}
+}
+
+.fadeOut {
+   -webkit-animation-name: fadeOut;
+   animation-name: fadeOut;
+}
+
+::selection{
+  background-color: #FF8D00;
+  color: #FFF;
+}
