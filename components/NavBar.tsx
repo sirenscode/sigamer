@@ -1,22 +1,37 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+declare var window: Window;
 const NavBar: React.FC = () =>{
     const [isDropdownOpen, setIsDropDown] = useState(false);
 
     function toggleDropdown(){
         setIsDropDown(!isDropdownOpen)
     }
+
+    useEffect(()=>{
+        window.onscroll = function(){
+            const scrollPos = window.scrollY || window.pageYOffset;
+            if(scrollPos>300){
+                document.getElementById("navbar")!.style.background="#111111";
+                document.getElementById("navbar")!.style.boxShadow="0px 0px 10px #D97F10";
+            }else{
+                document.getElementById("navbar")!.style.background="transparent";
+                document.getElementById("navbar")!.style.boxShadow="none";
+            }
+        }
+    },[])
+    
     return(
         <nav>
-            <div className="text-[#FFF] fixed w-full p-[10px] bg-[#111111] opacity-80 fixed z-[30] flex flex-row items-center justify-center gap-[20px]">
-                <a className="font-bold text-[#cf5223] text-[1.2em] flex flex-row items-center mr-[auto]" href="/"><img src="/images/logo.png" height={"100px"} width={"100px"} /></a>
+            <div id="navbar" className="z-[30] text-[#FFF] fixed w-full p-[10px] bg-[transparent]  fixed  flex flex-row items-center justify-center gap-[20px]">
+                <a className="font-bold text-[#cf5223] text-[1.2em] flex flex-row items-center mr-[auto]" href="/"><img src={"/images/logo.png"} height={"100px"} width={"100px"} /></a>
                 <a href="/about" className="ml-[auto]"><svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24"><path fill="#D97F10" d="M7 21v-6.075q-2.2-.35-3.6-2.037T2 9q0-2.5 1.75-4.25T8 3q2.2 0 3.888 1.4T13.924 8h4.25L16.6 6.4L18 5l4 4l-4 4l-1.425-1.4l1.6-1.6H13.9q-.725 0-1.275-.475t-.675-1.2q-.25-1.45-1.362-2.387T8 5Q6.35 5 5.175 6.175T4 9q0 1.475.938 2.588t2.387 1.362q.725.125 1.2.675T9 14.9V21z"/></svg></a>
                 <a href="#" onClick={toggleDropdown}><svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 1024 1024"><path fill="#D97F10" d="M160 448a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zM160 896a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z"/></svg></a>
                 <a href="/search" className=""><svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24"><path fill="#D97F10" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"/></svg></a>
             </div>  
-            <div className={isDropdownOpen ? "w-full bg-[#111111] h-[100vh] fixed z-[30] down flex flex-col items-center justify-center" : "hide" }>
-                <div className="flex flex-row items-center p-[20px]">
+            <div className={isDropdownOpen ? "w-full bg-[#111111] h-[100vh] fixed z-[30] down flex flex-col items-center justify-center top-[0]" : "hide" }>
+                <div className="flex flex-row items-center p-[20px] bg-[#111111]">
                     <a className="font-bold text-[#cf5223] text-[1.2em] flex flex-row items-center mr-[auto]" href="/"><img src="/images/logo.png" height={"150px"} width={"200px"} /></a>
                     <li className="flex flex-row items-right justify-end w-full"><a className="link ml-[auto] mb-[auto]" href="#" onClick={toggleDropdown}><svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 32 32"><path fill="#FF8D00" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2m5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg></a></li>
                 </div>

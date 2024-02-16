@@ -217,3 +217,10 @@ li{
   background-color: #FF8D00;
   color: #FFF;
 }
+#navbar{
+  transition: background 0.5s;
+}
+#hide{
+  box-shadow: 0px 0px 10px #FF8D00;
+  background: #111;
+}

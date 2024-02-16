@@ -5,6 +5,7 @@ import NavBar from '@/components/NavBar';
 import Info from '@/components/Info';
 import Loader from '@/components/loader';
 
+declare var document: Document;
 interface Item {
   title: string;
   description: string
@@ -14,7 +15,29 @@ interface Props {
     data: { latest_games: any[]; games: any[] }; 
     query: string;
 }
-
+interface screenshot{
+    urls: string
+}
+interface MinimumProps{
+    os: string;
+    processor: string;
+    direX: string;
+    ram: string;
+    hdd_space: string;
+    video_card: string
+}
+interface Item{
+    genre: string
+    image: string;
+    title: string;
+    description: string;
+    screenshots: screenshot[];
+    genres: string;
+    rating: string;
+    user_language: string;
+    minimum_requirements: MinimumProps;
+    trailer: string
+}
 const SearchComp: React.FC<Props> = ({ data,query }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +52,7 @@ const SearchComp: React.FC<Props> = ({ data,query }) => {
         const value = event.target.value.toLowerCase();
         setSearchTerm(value);
 
+        document.title = `SiGAMES - ${value}`;
         if(value!==""){
             const searchResults = searchByTitle(value);
             const results = Object.values(searchResults);
@@ -81,11 +105,11 @@ const SearchComp: React.FC<Props> = ({ data,query }) => {
                         directx={item.minimum_requirements.direX} 
                         ram={item.minimum_requirements.ram} 
                         space={item.minimum_requirements.hdd_space} 
-                        vcard={item.minimum_requirements.video_card}/>
+                        vcard={item.minimum_requirements.video_card}
+                        id={item.trailer}/>
                     ))}
                     </div>
             </div>  
-            <Info/>
             <Loader value={isLoading}/>
         </div>
         

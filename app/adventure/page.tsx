@@ -7,6 +7,30 @@ import NavBar from "@/components/NavBar";
 import Info from "@/components/Info";
 import Loader from "@/components/loader";
 
+declare var document: Document;
+interface screenshot{
+    urls: string
+}
+interface MinimumProps{
+    os: string;
+    processor: string;
+    direX: string;
+    ram: string;
+    hdd_space: string;
+    video_card: string
+}
+interface Item{
+    genre: string
+    image: string;
+    title: string;
+    description: string;
+    screenshots: screenshot[];
+    genres: string;
+    rating: string;
+    user_language: string;
+    minimum_requirements: MinimumProps;
+    trailer: string;
+}
 interface Item{
     genre: string
 }
@@ -25,8 +49,9 @@ const GetGenre: React.FC<Props> = ({data}) =>{
     useEffect(()=>{
         setGenreto(Object.values(genres));
         setTimeout(function(){setIsLoading(false)},2000);
+        document.title="SiGAMES - Adventure";
     },[])
-    document.title="SiGAMES - Adventure";
+    
     return(
         <div className="flex flex-col">
             <div className="flex flex-row flex-wrap w-full items-center justify-center gap-[20px]">
@@ -45,7 +70,8 @@ const GetGenre: React.FC<Props> = ({data}) =>{
                     directx={item.minimum_requirements.direX} 
                     ram={item.minimum_requirements.ram} 
                     space={item.minimum_requirements.hdd_space} 
-                    vcard={item.minimum_requirements.video_card}/>
+                    vcard={item.minimum_requirements.video_card}
+                    id={item.trailer}/>
                 ))}
             <Loader value={isLoading}/>
             </div>
@@ -63,7 +89,6 @@ const Adventure: React.FC = ()=>{
                 <h1 className="w-full text-left pl-[30px] text-2xl sm:text-[16px]">Adventure games</h1>
                 <GetGenre data={data}/>
             </div>
-            <Info/>
         </div>
         
     )
